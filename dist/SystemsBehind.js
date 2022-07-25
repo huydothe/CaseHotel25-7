@@ -55,7 +55,20 @@ class SystemsBehind {
     showList() {
         console.log("--- Guest List ---");
         let guest = this.hotelManager.showAllCustomer();
-        console.table(guest);
+        let data;
+        let show;
+        let container = [];
+        for (let i = 0; i < guest.length; i++) {
+            data = {
+                Name_Customer: guest[i].getPerson().getname(),
+                Date_of_birth: guest[i].getPerson().getdob(),
+                Identity: guest[i].getPerson().getindentity(),
+                Days_of_rent: guest[i].getDayOfRents(),
+                Room_type: guest[i].getType(),
+            };
+            container.push(data);
+        }
+        console.table(container);
     }
     ;
     creat() {
