@@ -4,12 +4,16 @@ import {Food} from "./Food";
 export class Hotel {
     private dayOfRents: string;
     private type: string;
+    private price:number;
     private person: Person;
+    private status_OrderFood: boolean=false;
 
-    constructor(dayOfRents: string, type: string, person: Person) {
+    constructor(dayOfRents: string, type: string, price: number, person: Person, status_OrderFood:boolean=false) {
         this.dayOfRents = dayOfRents;
         this.type = type;
+        this.price=price;
         this.person = person;
+        this.status_OrderFood=status_OrderFood;
     }
 
     getDayOfRents(): string {
@@ -28,6 +32,14 @@ export class Hotel {
         this.type = value;
     }
 
+    getPrice(){
+        return this.price;
+    }
+
+    setPrice(price:number){
+        this.price=price;
+    }
+
     getPerson(): Person {
         return this.person;
     }
@@ -36,5 +48,11 @@ export class Hotel {
         this.person = value;
     }
 
+    getStatus(){
+        return this.status_OrderFood;
+    }
 
+    setStatus(status:boolean){
+      this.status_OrderFood=status;
+    }
 }

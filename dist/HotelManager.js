@@ -5,11 +5,30 @@ class HotelManager {
     constructor() {
         this.storage = [];
         this.store = [];
+        // totalOrder(nameGuest: string, nameFood: string) {
+        //         let totalOrder = 0;
+        //         for (let i = 0; i < this.showAllCustomer().length; i++) {
+        //             if (this.showAllCustomer()[i].getPerson().getname() === nameGuest) {
+        //                 for (let j = 0; j < this.showGoodsInStore().length; j++) {
+        //                     if (this.showGoodsInStore()[j].getName() === nameFood) {
+        //                         totalOrder += +this.showGoodsInStore()[j].getAmount()*this.showGoodsInStore()[j].getOrderPrice();
+        //                     }
+        //                 }
+        //             }
+        //         }
+        //         return totalOrder;
+        //     }
     }
     showAllCustomer() {
         return this.storage;
     }
     ;
+    showGoodsInStore() {
+        return this.store;
+    }
+    creatGoods(goods) {
+        this.store.push(goods);
+    }
     creatNewCustomer(customer) {
         this.storage.push(customer);
     }
@@ -57,11 +76,23 @@ class HotelManager {
         }
         return newArr;
     }
-    orderFood(name, amount) {
-        for (let i = 0; i < this.store.length; i++) {
-            if (this.store[i].getName() === name) {
+    checkGuestOrderFood(nameGuest, nameFood, amount) {
+        let index = -1;
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i].getPerson().getname() === nameGuest) {
+                for (let j = 0; j < this.store.length; j++) {
+                    if (this.store[j].getName() === nameFood) {
+                        if (+this.store[j].getAmount() >= +amount) {
+                            this.storage[i].setStatus(true);
+                            index = j;
+                            return index;
+                        }
+                    }
+                }
+                index = -2;
             }
         }
+        return index;
     }
 }
 exports.HotelManager = HotelManager;

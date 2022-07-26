@@ -24,9 +24,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const rl = __importStar(require("readline-sync"));
-const SystemsBehind_1 = require("./SystemsBehind");
+const Systems_1 = require("./Systems");
 let choice = -1;
-let system = new SystemsBehind_1.SystemsBehind();
+let system = new Systems_1.Systems();
+system.initGuest();
+system.initGoods();
 function menu() {
     console.log("--- Hotel Manager ---");
     console.log("1. Show All Customer.");
@@ -36,7 +38,7 @@ function menu() {
     console.log("5. Search Guest's Information.");
     console.log("6. Guest's Order.");
     console.log("7. Total Amount To Pay.");
-    console.log("8. Information About Tenants (--- Admin only ---) .");
+    console.log("8. Information of Hotel Systems (--- Admin only ---) .");
     console.log("0. Exit.");
 }
 function MenuSearch() {
@@ -46,10 +48,15 @@ function MenuSearch() {
     console.log("0. Exit");
 }
 function menuFood() {
-    console.log("1. CocaCola : 12$");
-    console.log("2. Pepsi");
-    console.log("3. Chip");
-    console.log("4. Sweet cake");
+    console.log("-Menu-------------------------");
+    console.log("a. --- CocaCola : 12$ per one ---");
+    console.log("b. --- Pepsi : 12$ per one ---");
+    console.log("c. --- Chip : 50$ per one ---");
+    console.log("d. --- Sweet cake : 120$ per one ---");
+}
+function menuOrder() {
+    console.log("1. Order Food.");
+    console.log("0. Exit.");
 }
 do {
     menu();
@@ -88,27 +95,27 @@ do {
             break;
         case 6:
             console.log("Guest's Order");
-            let foodChoice = -1;
+            let OrderChoice = -1;
             do {
                 menuFood();
-                foodChoice = +rl.question("What food do you want?");
-                switch (foodChoice) {
+                menuOrder();
+                OrderChoice = +rl.question("--- Enter your choice ---");
+                switch (OrderChoice) {
                     case 1:
-                        console.log("CocaCola");
+                        system.orderFood();
                         break;
-                    case 2:
-                        console.log("Pepsi");
-                        break;
-                    case 3:
-                        console.log("Chip");
-                        break;
-                    case 4:
-                        console.log("Sweet Cake");
+                    //     case 2:
+                    //         console.log("Tong so tien can thanh toan")
+                    //         console.log(system.totalOrderFood);
                 }
-            } while (foodChoice != 0);
+            } while (OrderChoice != 0);
             break;
         case 7:
-            console.log("Total Amount To Pay");
+            console.log("--- Total Amount To Pay ---");
+            let nameGuest = rl.question("Enter Guest's name: ");
+            let IDGuest = rl.question("Enter Guest's ID: ");
+            let Price = system.getRoomPrice(nameGuest, IDGuest);
+            console.log(`So tien phong ma ban phai tra la ${Price} dollar`);
             break;
         case 8:
             console.log("Information About Tenants (--- Admin only ---)");
