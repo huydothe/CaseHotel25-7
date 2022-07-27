@@ -4,17 +4,17 @@ import {Food} from "./Food";
 
 export class HotelManager {
     storage: Hotel[] = [];
-     store: Food[] = [];
+    store: Food[] = [];
 
     showAllCustomer() {
         return this.storage;
     };
 
-    showGoodsInStore(){
+    showGoodsInStore() {
         return this.store;
     }
 
-    creatGoods(goods:Food){
+    creatGoods(goods: Food) {
         this.store.push(goods);
     }
 
@@ -29,6 +29,38 @@ export class HotelManager {
             }
         }
     };
+
+    editGuestNameInfo(ID: string, newName: string): void {
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i].getPerson().getindentity() === ID) {
+                this.storage[i].getPerson().setname(newName);
+            }
+        }
+    }
+
+    editGuestDobInfo(ID: string, newDob: string): void {
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i].getPerson().getindentity() === ID) {
+                this.storage[i].getPerson().setdob(newDob);
+            }
+        }
+    }
+
+    editDayOfRentInfo(ID: string, newDayOfRent: string): void {
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i].getPerson().getindentity() === ID) {
+                this.storage[i].setDayOfRents(newDayOfRent);
+            }
+        }
+    }
+
+    editTypeInfo(ID: string, newType: string): void {
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i].getPerson().getindentity() === ID) {
+                this.storage[i].setType(newType);
+            }
+        }
+    }
 
     deleteGuestInfo(ID: string): void {
         for (let i = 0; i < this.storage.length; i++) {
@@ -68,15 +100,15 @@ export class HotelManager {
         return newArr;
     }
 
-    checkGuestOrderFood(nameGuest:string,nameFood:string,amount:string){
+    checkGuestOrderFood(nameGuest: string,ID:string, nameFood: string, amount: string) {
         let index = -1;
-        for(let i=0; i<this.storage.length; i++){
-            if(this.storage[i].getPerson().getname()===nameGuest){
+        for (let i = 0; i < this.storage.length; i++) {
+            if (this.storage[i].getPerson().getname() === nameGuest && this.storage[i].getPerson().getindentity() === ID) {
                 for (let j = 0; j < this.store.length; j++) {
                     if (this.store[j].getName() === nameFood) {
                         if (+this.store[j].getAmount() >= +amount) {
                             this.storage[i].setStatus(true);
-                            index = j;
+                            index = j+1;
                             return index;
                         }
                     }
@@ -86,18 +118,4 @@ export class HotelManager {
         }
         return index;
     }
-
-    // totalOrder(nameGuest: string, nameFood: string) {
-    //         let totalOrder = 0;
-    //         for (let i = 0; i < this.showAllCustomer().length; i++) {
-    //             if (this.showAllCustomer()[i].getPerson().getname() === nameGuest) {
-    //                 for (let j = 0; j < this.showGoodsInStore().length; j++) {
-    //                     if (this.showGoodsInStore()[j].getName() === nameFood) {
-    //                         totalOrder += +this.showGoodsInStore()[j].getAmount()*this.showGoodsInStore()[j].getOrderPrice();
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //         return totalOrder;
-    //     }
 }
