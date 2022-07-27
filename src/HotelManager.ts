@@ -1,10 +1,12 @@
 import {Hotel} from "./Hotel";
 import {Person} from "./Person";
 import {Food} from "./Food";
+import {Admin} from "./Admin";
 
 export class HotelManager {
     storage: Hotel[] = [];
     store: Food[] = [];
+    Admin: Admin[]=[];
 
     showAllCustomer() {
         return this.storage;
@@ -12,6 +14,10 @@ export class HotelManager {
 
     showGoodsInStore() {
         return this.store;
+    }
+
+    creatAdmin(admin:Admin){
+        this.Admin.push(admin);
     }
 
     creatGoods(goods: Food) {
@@ -117,5 +123,14 @@ export class HotelManager {
             }
         }
         return index;
+    }
+
+    checkAdmin(username:string, password:string):boolean{
+        for(let i=0; i<this.Admin.length; i++){
+            if(this.Admin[i].getUserName()===username && this.Admin[i].getPassword()===password){
+                return true;
+            }
+        }
+        return false;
     }
 }

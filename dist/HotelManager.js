@@ -5,6 +5,7 @@ class HotelManager {
     constructor() {
         this.storage = [];
         this.store = [];
+        this.Admin = [];
     }
     showAllCustomer() {
         return this.storage;
@@ -12,6 +13,9 @@ class HotelManager {
     ;
     showGoodsInStore() {
         return this.store;
+    }
+    creatAdmin(admin) {
+        this.Admin.push(admin);
     }
     creatGoods(goods) {
         this.store.push(goods);
@@ -108,6 +112,14 @@ class HotelManager {
             }
         }
         return index;
+    }
+    checkAdmin(username, password) {
+        for (let i = 0; i < this.Admin.length; i++) {
+            if (this.Admin[i].getUserName() === username && this.Admin[i].getPassword() === password) {
+                return true;
+            }
+        }
+        return false;
     }
 }
 exports.HotelManager = HotelManager;

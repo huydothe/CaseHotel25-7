@@ -29,6 +29,7 @@ const rl = __importStar(require("readline-sync"));
 const Person_1 = require("./Person");
 const Hotel_1 = require("./Hotel");
 const Food_1 = require("./Food");
+const Admin_1 = require("./Admin");
 const kingPrice = 5000;
 const normalPrice = 1000;
 const cocaPrice = 12;
@@ -39,7 +40,6 @@ class Systems {
     constructor() {
         this.hotelManager = new HotelManager_1.HotelManager();
         this.listOrder = [];
-        this.listReceipt = [];
     }
     initGuest() {
         let Huy = new Person_1.Person("Huy", "11/06/1999", "110699");
@@ -64,6 +64,12 @@ class Systems {
         this.hotelManager.creatGoods(Pepsi);
         this.hotelManager.creatGoods(Chip);
         this.hotelManager.creatGoods(SweetCake);
+    }
+    admin() {
+        let admin_Huy = new Admin_1.Admin("huydothe1999@gmail.com", "110699");
+        let admin_Boss = new Admin_1.Admin("boss", "boss");
+        this.hotelManager.creatAdmin(admin_Huy);
+        this.hotelManager.creatAdmin(admin_Boss);
     }
     inputGuestInfo() {
         let name = rl.question("What is Guest's name? ");
@@ -211,7 +217,7 @@ class Systems {
     }
     orderFood() {
         let nameGuest = rl.question("Please, Enter guest name! ");
-        let GuestID = rl.question("Please, Enter guest Identity!");
+        let GuestID = rl.question("Please, Enter guest Identity! ");
         let nameFood = rl.question("Please, enter goods's name! ");
         let qualities = rl.question("Please, enter qualities! ");
         function checkPriceFood() {
@@ -289,5 +295,8 @@ class Systems {
         console.table(data);
     }
     ;
+    validateAdmin(userName, password) {
+        return this.hotelManager.checkAdmin(userName, password);
+    }
 }
 exports.Systems = Systems;

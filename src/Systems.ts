@@ -3,6 +3,7 @@ import * as rl from "readline-sync";
 import {Person} from "./Person";
 import {Hotel} from "./Hotel";
 import {Food} from "./Food";
+import {Admin} from "./Admin";
 
 const kingPrice: number = 5000;
 const normalPrice: number = 1000;
@@ -14,7 +15,6 @@ const sweetCakePrice: number = 120;
 export class Systems {
     hotelManager = new HotelManager();
     listOrder: any[] = [];
-    listReceipt: any[] = [];
 
     initGuest() {
         let Huy = new Person("Huy", "11/06/1999", "110699");
@@ -44,6 +44,14 @@ export class Systems {
         this.hotelManager.creatGoods(Pepsi);
         this.hotelManager.creatGoods(Chip);
         this.hotelManager.creatGoods(SweetCake);
+    }
+
+    admin(){
+        let admin_Huy=new Admin("huydothe1999@gmail.com","110699");
+        let admin_Boss=new Admin("boss","boss")
+
+        this.hotelManager.creatAdmin(admin_Huy);
+        this.hotelManager.creatAdmin(admin_Boss);
     }
 
     inputGuestInfo() {
@@ -199,7 +207,7 @@ export class Systems {
 
     orderFood() {
         let nameGuest = rl.question("Please, Enter guest name! ");
-        let GuestID = rl.question("Please, Enter guest Identity!")
+        let GuestID = rl.question("Please, Enter guest Identity! ");
         let nameFood = rl.question("Please, enter goods's name! ");
         let qualities = rl.question("Please, enter qualities! ");
 
@@ -276,4 +284,8 @@ export class Systems {
         }
         console.table(data);
     };
+
+    validateAdmin(userName:string,password:string){
+        return this.hotelManager.checkAdmin(userName,password);
+    }
 }
