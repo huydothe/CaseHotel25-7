@@ -16,8 +16,8 @@ export class HotelManager {
         return this.store;
     }
 
-    creatAdmin(admin:Admin){
-        this.Admin.push(admin);
+    showAdmin(){
+        return this.Admin;
     }
 
     creatGoods(goods: Food) {
@@ -27,6 +27,15 @@ export class HotelManager {
     creatNewCustomer(customer: Hotel): void {
         this.storage.push(customer);
     };
+
+    creatAdmin(admin:Admin){
+        this.Admin.push(admin);
+    }
+
+    CreatAdminAccount(username:string, password:string) {
+        let newAdmin = new Admin(username,password);
+        this.Admin.push(newAdmin);
+    }
 
     editGuestInfo(ID: string, newCustomer: Hotel): void {
         for (let i = 0; i < this.storage.length; i++) {

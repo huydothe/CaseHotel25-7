@@ -30,6 +30,7 @@ const Person_1 = require("./Person");
 const Hotel_1 = require("./Hotel");
 const Food_1 = require("./Food");
 const Admin_1 = require("./Admin");
+const CheckValidate_1 = require("./CheckValidate");
 const kingPrice = 5000;
 const normalPrice = 1000;
 const cocaPrice = 12;
@@ -40,6 +41,7 @@ class Systems {
     constructor() {
         this.hotelManager = new HotelManager_1.HotelManager();
         this.listOrder = [];
+        this.checkNewAdmin = new CheckValidate_1.CheckValidate();
     }
     initGuest() {
         let Huy = new Person_1.Person("Huy", "11/06/1999", "110699");
@@ -116,6 +118,10 @@ class Systems {
         console.table(container);
     }
     ;
+    showAdminAccount() {
+        let showAdmin = this.hotelManager.showAdmin();
+        console.table(showAdmin);
+    }
     creat() {
         console.log("--- Creat new customer's Info ---");
         let newCustomer = this.inputGuestRoom();
@@ -127,6 +133,7 @@ class Systems {
         let ID = rl.question("Please enter the identity which need to be updated: ");
         let guest = this.inputGuestRoom();
         this.hotelManager.editGuestInfo(ID, guest);
+        this.hotelManager.showAllCustomer();
     }
     ;
     editName() {
@@ -145,8 +152,8 @@ class Systems {
     }
     editDayOfRent() {
         console.log("--- Edit Day of rent ---");
-        let ID = rl.question("Enter guest's Identity");
-        let newDayOfRent = rl.question("Enter Guest's new days of rent");
+        let ID = rl.question("Enter guest's Identity: ");
+        let newDayOfRent = rl.question("Enter Guest's new days of rent: ");
         this.hotelManager.editDayOfRentInfo(ID, newDayOfRent);
         this.hotelManager.showAllCustomer();
     }
@@ -297,6 +304,17 @@ class Systems {
     ;
     validateAdmin(userName, password) {
         return this.hotelManager.checkAdmin(userName, password);
+    }
+    addAdminAccount(username, password) {
+        return this.hotelManager.CreatAdminAccount(username, password);
+    }
+    checkValidateUser(newUsername) {
+        let listAdmin = this.hotelManager.showAdmin();
+        for (let i = 0; i < listAdmin.length; i++) {
+            if (listAdmin[i].getUserName() != newUsername) {
+                return this.checkNewAdmin.isValidUsername(newUsername);
+            }
+        }
     }
 }
 exports.Systems = Systems;

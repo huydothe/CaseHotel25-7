@@ -4,6 +4,7 @@ import {Person} from "./Person";
 import {Hotel} from "./Hotel";
 import {Food} from "./Food";
 import {Admin} from "./Admin";
+import {CheckValidate} from "./CheckValidate";
 
 const kingPrice: number = 5000;
 const normalPrice: number = 1000;
@@ -15,6 +16,7 @@ const sweetCakePrice: number = 120;
 export class Systems {
     hotelManager = new HotelManager();
     listOrder: any[] = [];
+    checkNewAdmin= new CheckValidate();
 
     initGuest() {
         let Huy = new Person("Huy", "11/06/1999", "110699");
@@ -99,6 +101,11 @@ export class Systems {
         console.table(container);
     };
 
+    showAdminAccount(){
+        let showAdmin = this.hotelManager.showAdmin();
+        console.table(showAdmin);
+    }
+
     creat() {
         console.log("--- Creat new customer's Info ---");
         let newCustomer = this.inputGuestRoom();
@@ -110,6 +117,7 @@ export class Systems {
         let ID = rl.question("Please enter the identity which need to be updated: ");
         let guest = this.inputGuestRoom();
         this.hotelManager.editGuestInfo(ID, guest);
+        this.hotelManager.showAllCustomer();
     };
 
     editName() {
@@ -117,7 +125,7 @@ export class Systems {
         let ID = rl.question("Enter guest's Identity: ");
         let newName = rl.question("Enter Guest's new name: ");
         this.hotelManager.editGuestNameInfo(ID, newName);
-        this.hotelManager.showAllCustomer()
+        this.hotelManager.showAllCustomer();
     }
 
     editDob() {
@@ -130,8 +138,8 @@ export class Systems {
 
     editDayOfRent() {
         console.log("--- Edit Day of rent ---");
-        let ID = rl.question("Enter guest's Identity");
-        let newDayOfRent = rl.question("Enter Guest's new days of rent");
+        let ID = rl.question("Enter guest's Identity: ");
+        let newDayOfRent = rl.question("Enter Guest's new days of rent: ");
         this.hotelManager.editDayOfRentInfo(ID, newDayOfRent);
         this.hotelManager.showAllCustomer();
     }
@@ -287,5 +295,18 @@ export class Systems {
 
     validateAdmin(userName:string,password:string){
         return this.hotelManager.checkAdmin(userName,password);
+    }
+
+    addAdminAccount(username:string,password:string){
+        return this.hotelManager.CreatAdminAccount(username,password);
+    }
+
+    checkValidateUser(newUsername:string){
+        let listAdmin = this.hotelManager.showAdmin()
+        for (let i=0; i<listAdmin.length; i++){
+            if(listAdmin[i].getUserName() != newUsername){
+                return this.checkNewAdmin.isValidUsername(newUsername);
+            }
+        }
     }
 }

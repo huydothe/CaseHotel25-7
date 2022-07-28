@@ -47,6 +47,8 @@ var AdminChoice;
     AdminChoice[AdminChoice["Creat_New_Customer"] = 1] = "Creat_New_Customer";
     AdminChoice[AdminChoice["Edit_Guests_Information"] = 2] = "Edit_Guests_Information";
     AdminChoice[AdminChoice["Delete_Guests_Information"] = 3] = "Delete_Guests_Information";
+    AdminChoice[AdminChoice["Creat_a_Account"] = 4] = "Creat_a_Account";
+    AdminChoice[AdminChoice["Show_Admin_Info"] = 5] = "Show_Admin_Info";
 })(AdminChoice || (AdminChoice = {}));
 var Edit;
 (function (Edit) {
@@ -116,7 +118,7 @@ do {
             system.checkNameInReceipt(nameGuest, IDGuest);
             break;
         case OptionalChoice.Information_of_Hotel_Systems:
-            console.log("Information About Tenants (--- Admin only ---)");
+            console.log("Information About Tenants (!----- Admin only -----!)");
             let username = rl.question("Enter your UserName: ");
             let password = rl.question("Enter your Password: ");
             let validate = system.validateAdmin(username, password);
@@ -162,6 +164,24 @@ do {
                             system.showList();
                             system.delete();
                             system.showList();
+                            console.log("--- Delete success ---");
+                            break;
+                        case AdminChoice.Creat_a_Account:
+                            console.log("--- Creat a Account ---");
+                            let newUserName = rl.question("---Enter New Admin Username---: ");
+                            let isValidUsername = system.checkValidateUser(newUserName);
+                            if (isValidUsername) {
+                                let newPassword = rl.question("---Enter New Admin Password---: ");
+                                system.addAdminAccount(newUserName, newPassword);
+                                console.log("--- Creat account success ---");
+                            }
+                            else {
+                                console.log("!!!--- this username isn't available. please enter a new one ---!!!");
+                            }
+                            break;
+                        case AdminChoice.Show_Admin_Info:
+                            console.log("---Show Admin account ---");
+                            system.showAdminAccount();
                             break;
                     }
                 } while (Choice != 0);

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.HotelManager = void 0;
+const Admin_1 = require("./Admin");
 class HotelManager {
     constructor() {
         this.storage = [];
@@ -14,8 +15,8 @@ class HotelManager {
     showGoodsInStore() {
         return this.store;
     }
-    creatAdmin(admin) {
-        this.Admin.push(admin);
+    showAdmin() {
+        return this.Admin;
     }
     creatGoods(goods) {
         this.store.push(goods);
@@ -24,6 +25,13 @@ class HotelManager {
         this.storage.push(customer);
     }
     ;
+    creatAdmin(admin) {
+        this.Admin.push(admin);
+    }
+    CreatAdminAccount(username, password) {
+        let newAdmin = new Admin_1.Admin(username, password);
+        this.Admin.push(newAdmin);
+    }
     editGuestInfo(ID, newCustomer) {
         for (let i = 0; i < this.storage.length; i++) {
             if (this.storage[i].getPerson().getindentity() === ID) {
