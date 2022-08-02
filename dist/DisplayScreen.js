@@ -49,6 +49,7 @@ var AdminChoice;
     AdminChoice[AdminChoice["Delete_Guests_Information"] = 3] = "Delete_Guests_Information";
     AdminChoice[AdminChoice["Creat_a_Account"] = 4] = "Creat_a_Account";
     AdminChoice[AdminChoice["Show_Admin_Info"] = 5] = "Show_Admin_Info";
+    AdminChoice[AdminChoice["Show_Goods"] = 6] = "Show_Goods";
 })(AdminChoice || (AdminChoice = {}));
 var Edit;
 (function (Edit) {
@@ -83,7 +84,7 @@ do {
             let searchChoice = -1;
             do {
                 menu.MenuSearch();
-                searchChoice = +rl.question("What you gonna do? ");
+                searchChoice = +rl.question("Enter your choice: ");
                 switch (searchChoice) {
                     case Search.Search_Guests_Information_by_name:
                         system.searchByName();
@@ -177,12 +178,16 @@ do {
                             }
                             else {
                                 console.log("!!!--- this username isn't available. please enter a new one ---!!!");
+                                console.log("!!!--- Please, Capitalizes the first letter of username and the username must be more than 5 words, less than 15 words and end with @gmail.com ---!!!");
                             }
                             break;
                         case AdminChoice.Show_Admin_Info:
                             console.log("---Show Admin account ---");
                             system.showAdminAccount();
                             break;
+                        case AdminChoice.Show_Goods:
+                            console.log("--- Show All goods ---");
+                            system.showGoods();
                     }
                 } while (Choice != 0);
             }
@@ -192,4 +197,3 @@ do {
             break;
     }
 } while (choice != OptionalChoice.Exit);
-// 864

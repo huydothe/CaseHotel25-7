@@ -38,12 +38,13 @@ class Menu {
         console.log("---0. Exit---");
     }
     menuAdmin() {
-        console.log("--- 0.Exit ---");
         console.log("--- 1. Creat New Customer ---");
         console.log("--- 2. Edit Guest's Information ---");
         console.log("--- 3. Delete Guest's Information ---");
         console.log("--- 4. Creat a Account ---");
         console.log("--- 5. Show Admin Information ---");
+        console.log("--- 6. Show Goods in Store ---");
+        console.log("--- 0.Exit ---");
     }
 }
 exports.Menu = Menu;

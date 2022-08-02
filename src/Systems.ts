@@ -66,7 +66,7 @@ export class Systems {
     inputGuestRoom() {
         let guest = this.inputGuestInfo();
         let dayOfRent = rl.question("How long do you want to rent? ");
-        let type = rl.question("What kind of room do you want to rent? ");
+        let type = rl.question("What kind of room do you want to rent( --King or Normal-- )? ");
 
         function getPrice() {
             if (type === 'king') {
@@ -100,6 +100,11 @@ export class Systems {
         }
         console.table(container);
     };
+
+    showGoods(){
+        let goods = this.hotelManager.showGoodsInStore()
+        console.table(goods);
+    }
 
     showAdminAccount(){
         let showAdmin = this.hotelManager.showAdmin();
@@ -147,14 +152,14 @@ export class Systems {
     editType() {
         console.log("--- Edit Day of rent ---");
         let ID = rl.question("Enter guest's Identity: ");
-        let newType = rl.question("Enter Guest's new type of room: ");
-        this.hotelManager.editDayOfRentInfo(ID, newType);
+        let newType = rl.question("Enter Guest's new type of room (--King or Normal--): ");
+        this.hotelManager.editTypeInfo(ID, newType);
         this.hotelManager.showAllCustomer();
     }
 
     delete() {
         console.log("--- Delete a Customer Information ---");
-        let ID = rl.question("Please enter the identity which need to be updated: ");
+        let ID = rl.question("Please enter the identity of guest who needs to be deleted: ");
         this.hotelManager.deleteGuestInfo(ID);
     };
 
@@ -214,10 +219,10 @@ export class Systems {
 
 
     orderFood() {
-        let nameGuest = rl.question("Please, Enter guest name! ");
-        let GuestID = rl.question("Please, Enter guest Identity! ");
-        let nameFood = rl.question("Please, enter goods's name! ");
-        let qualities = rl.question("Please, enter qualities! ");
+        let nameGuest = rl.question("Please, Enter guest name: ");
+        let GuestID = rl.question("Please, Enter guest Identity: ");
+        let nameFood = rl.question("Please, enter goods's name: ");
+        let qualities = rl.question("Please, enter qualities: ");
 
         function checkPriceFood() {
             if (nameFood === "Coca") {

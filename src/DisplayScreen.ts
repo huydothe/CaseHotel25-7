@@ -29,6 +29,7 @@ enum AdminChoice {
     Delete_Guests_Information = 3,
     Creat_a_Account = 4,
     Show_Admin_Info = 5,
+    Show_Goods = 6
 }
 
 enum Edit {
@@ -66,7 +67,7 @@ do {
             let searchChoice = -1;
             do {
                 menu.MenuSearch();
-                searchChoice = +rl.question("What you gonna do? ");
+                searchChoice = +rl.question("Enter your choice: ");
                 switch (searchChoice) {
                     case Search.Search_Guests_Information_by_name:
                         system.searchByName();
@@ -172,6 +173,7 @@ do {
                                 console.log("--- Creat account success ---");
                             } else {
                                 console.log("!!!--- this username isn't available. please enter a new one ---!!!")
+                                console.log("!!!--- Please, Capitalizes the first letter of username and the username must be more than 5 words, less than 15 words and end with @gmail.com ---!!!")
                             }
                             break;
 
@@ -179,6 +181,9 @@ do {
                             console.log("---Show Admin account ---");
                             system.showAdminAccount();
                             break;
+                        case AdminChoice.Show_Goods:
+                            console.log("--- Show All goods ---");
+                            system.showGoods();
                     }
                 } while (Choice != 0);
             } else {
